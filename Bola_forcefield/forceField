@@ -1,0 +1,72 @@
+
+pair_style         lj/cut/coul/long 12 10 
+pair_modify tail yes
+kspace_style pppm 1.0e-4
+pair_modify mix geometric
+pair_coeff 1 1 0.070 3.55 # 1 CS: thiophene carbon close to S
+pair_coeff 2 2 0.070 3.55 # 2 CA: thiophene carbon far from S
+pair_coeff 3 3 0.030 2.42 # 3 HA: thiophene hydrogen
+pair_coeff 4 4 0.250 3.55 # 4 S
+pair_coeff 5 5 0.066 3.55 # 5 CT for PEO
+pair_coeff 6 6 0.030 2.50 # 6 HC
+pair_coeff 7 7 0.140 2.90 # 7 OS
+pair_coeff 8 8 0.066 3.55 # 8 CT for alkyl
+pair_coeff 9 9 0.030 2.50 # 9 HC
+
+bond_style harmonic
+bond_coeff  1 456.892 1.37368 # 1 CS-CA
+bond_coeff  2 307.105 1.0840  # 2 CA-HA
+bond_coeff  3 392.459 1.43277 # 3 CA-CA
+bond_coeff  4 209.200 1.73373 # 4 CS-S
+bond_coeff  5 322.168 1.45    # 5 CS-CS
+bond_coeff  6 317.00  1.5010  # 6 CA-CT
+bond_coeff  7 265.26  1.5010  # 7 CS-CT
+bond_coeff  8 340.00  1.0900  # 8 CT-HC
+bond_coeff  9 320.00  1.41    # 9 CT-OS
+bond_coeff 10 268.00  1.5290  # 10 CT-CT
+
+angle_style harmonic
+angle_coeff  1 58.5760 111.588 # 1 CA-CS-S
+angle_coeff  2 52.7184 128.421 # 2 CA-CS-CS
+angle_coeff  3 52.7184 120.381 # 3 CS-CS-S
+angle_coeff  4 29.2880 123.496 # 4 CS-CA-HA
+angle_coeff  5 58.5760 113.625 # 5 CS-CA-CA
+angle_coeff  6 29.2880 122.873 # 6 HA-CA-CA
+angle_coeff  7 61.9232  91.739 # 7 CS-S-CS
+angle_coeff  8 70.00   122.763 # 8 CA-CA-CT
+angle_coeff  9 70.00   125.380 # 9 CS-CA-CT
+angle_coeff 10 29.2880 123.496 # 10 CA-CS-CT
+angle_coeff 11 29.2880 120.366 # 11 S-CS-CT
+angle_coeff 12 37.50   110.70  # 12 CA-CT-HC
+angle_coeff 13 58.35   112.70  # 13 CA-CT-OS
+angle_coeff 14 33.00   107.80  # 14 HC-CT-HC
+angle_coeff 15 35.00   109.50  # 15 HC-CT-OS
+angle_coeff 16 60.00   109.50  # 16 CT-OS-CT
+angle_coeff 17 50.00   109.50  # 17 CT-CT-OS
+angle_coeff 18 37.50   110.70  # 18 HC-CT-CT
+angle_coeff 19 37.50   110.70  # 19 CS-CT-HC
+angle_coeff 20 58.35   112.70  # 20 CS-CT-CT
+angle_coeff 21 58.35   112.70  # 21 CT-CT-CT
+
+
+dihedral_style hybrid multi/harmonic opls
+# 1 S-CS-CA-HA, CS-CS-CA-HA, CS-CA-CA-HA, HA-CA-CA-CT, CT-CS-CA-CA, CT-CS-CA-HA, CT-CS-S-CS
+# 2 S-CS-CA-CA, CS-CS-CA-CA, CS-CA-CA-CS, CA-CS-S-CS, CS-CS-S-CS
+dihedral_coeff  1 multi/harmonic 0 0 0 0 0
+dihedral_coeff  2 multi/harmonic 7.25001 0 -7.25004 0 0
+######
+dihedral_coeff  3 multi/harmonic 0.104151 -0.0396317 -0.717735 0.135491 -0.212979 # 3 CA-CS-CS-CA / S-CS-CS-S
+dihedral_coeff  4 multi/harmonic 0.127616 0 -0.917885 0 0 # 4 CA-CS-CS-S
+######
+# 5 CA-CA-CT-HC, CA-CA-CT-OS, CS-CA-CT-HC, CS-CA-CT-HC;   CA-CS-CT-HC, CA-CS-CT-CT, S-CS-CT-HC, S-CS-CT-CT
+dihedral_coeff  5 multi/harmonic 0 0 0 0 0
+dihedral_coeff  6 opls  0.650 -0.250  0.670  0 # 6 CA-CT-OS-CT / CT-CT-OS-CT
+dihedral_coeff  7 opls  0      0      0.760  0 # 7 HC-CT-OS-CT
+dihedral_coeff  8 opls  0      0      0.468  0 # 8 HC-CT-CT-OS
+dihedral_coeff  9 opls -0.550  0      0      0 # 9 OS-CT-CT-OS
+dihedral_coeff 10 opls  0      0      0.300  0 # 10 HC-CT-CT-HC / CT-CT-CT-HC
+dihedral_coeff 11 opls  0      0      0.366  0 # 11 CS-CT-CT-HC
+dihedral_coeff 12 opls  2.732 -0.229  0.485  0 # 12 CS-CT-CT-CT / CS-CT-CT-OS
+dihedral_coeff 13 opls  1.300 -0.050  0.200  0 # 13 CT-CT-CT-CT
+
+special_bonds lj/coul 0 0 0.5
