@@ -8,3 +8,6 @@ folder contents:
 
 ion_mobility_calc: A python code to analyze the MSD of ions in an electric field to calculate ionic mobility
 
+Bola_forcefield: forcefield information for running simulations of Bola molecules
+
+Tcl_scripts: scripts for use with the visual molecular dynamics software
